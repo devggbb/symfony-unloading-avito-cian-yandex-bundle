@@ -1,9 +1,9 @@
 <?php
 
-namespace Ggbb\SymfonyUnloadingAvitoCianYandexBundle;
+namespace Ggbb\SymfonyUploadingAvitoCianYandexBundle;
 
 use Symfony\Component\HttpKernel\Bundle\AbstractBundle;
 
-class SymfonyUnloadingAvitoCianYandexBundle extends AbstractBundle
+class SymfonyUploadingAvitoCianYandexBundle extends AbstractBundle
 {
 }
