@@ -1,0 +1,14 @@
+services:
+  Ggbb\SymfonyUploadingAvitoCianYandexBundle\Service\UploadingService: '@symfony_uploading_avito_cian_yandex.uploading_service'
+  symfony_uploading_avito_cian_yandex.uploading_service:
+    class: Ggbb\SymfonyUploadingAvitoCianYandexBundle\Service\UploadingService
+    autowire: true
+    autoconfigure: true
+
+  Ggbb\SymfonyUploadingAvitoCianYandexBundle\Serializer\UploadingXmlNormalizer: '@symfony_uploading_avito_cian_yandex.uploading_xml_normalizer'
+  symfony_uploading_avito_cian_yandex.uploading_xml_normalizer:
+    class: Ggbb\SymfonyUploadingAvitoCianYandexBundle\Serializer\UploadingXmlNormalizer
+    autowire: true
+    autoconfigure: true
+    tags:
+      - { name: serializer.normalizer, priority: -155000 }
