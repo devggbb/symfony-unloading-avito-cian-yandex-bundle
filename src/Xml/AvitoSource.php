@@ -12,6 +12,11 @@ class AvitoSource extends AbstractXmlSource
         return 'avito';
     }
 
+    public function getNodeName(): string
+    {
+        return 'Ads';
+    }
+
     public function getItem(): mixed
     {
         return new Ad();

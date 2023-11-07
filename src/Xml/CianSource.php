@@ -2,6 +2,9 @@
 
 namespace Ggbb\SymfonyUploadingAvitoCianYandexBundle\Xml;
 
+use Ggbb\SymfonyUploadingAvitoCianYandexBundle\Xml\Cian\Feed;
+use Ggbb\SymfonyUploadingAvitoCianYandexBundle\Xml\Cian\Object\OfficeRent;
+
 class CianSource extends AbstractXmlSource
 {
     static function getSource(): string
@@ -9,13 +12,21 @@ class CianSource extends AbstractXmlSource
         return 'cian';
     }
 
+    public function getNodeName(): string
+    {
+        return 'feed';
+    }
+
     public function getItem(): mixed
     {
-        return 'Tesat';
+        return new OfficeRent();
     }
 
     public function wrapper(array $items): mixed
     {
-        // TODO: Implement wrapper() method.
+        $feed = new Feed();
+        $feed->object = $items;
+
+        return $feed;
     }
 }

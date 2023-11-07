@@ -10,6 +10,7 @@ interface XmlSourceInterface
 
     public function nodeGenerate(UploadingXmlNormalizer $normalizer, array $objects): mixed;
 
+    public function getNodeName(): string;
     public function getItem(): mixed;
 
     public function wrapper(array $items): mixed;

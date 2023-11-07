@@ -30,7 +30,7 @@ class UploadingService
             $node,
             XmlEncoder::FORMAT,
             [
-                XmlEncoder::ROOT_NODE_NAME => 'Ads',
+                XmlEncoder::ROOT_NODE_NAME => $source->getNodeName(),
                 XmlEncoder::ENCODING => 'UTF-8',
             ],
         );
