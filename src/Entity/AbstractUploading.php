@@ -5,8 +5,11 @@ namespace Ggbb\SymfonyUploadingAvitoCianYandexBundle\Entity;
 
 use Ggbb\SymfonyUploadingAvitoCianYandexBundle\Entity\interface\UploadingInterface;
 use Ggbb\SymfonyUploadingAvitoCianYandexBundle\Type\StatusType;
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
-class Uploading implements UploadingInterface
+#[ORM\MappedSuperclass]
+abstract class AbstractUploading implements UploadingInterface
 {
     #[ORM\Column(length: 255)]
     #[Assert\Choice(choices: StatusType::NAME)]
@@ -26,7 +29,6 @@ class Uploading implements UploadingInterface
 
         return $this;
     }
-
 
     public function getSource(): ?string
     {

@@ -13,7 +13,6 @@ use Symfony\Component\HttpKernel\Bundle\AbstractBundle;
 
 class SymfonyUploadingAvitoCianYandexBundle extends AbstractBundle
 {
-
     public function configure(DefinitionConfigurator $definition): void
     {
         $definition->rootNode()
@@ -26,22 +25,28 @@ class SymfonyUploadingAvitoCianYandexBundle extends AbstractBundle
                         ->end()
                     ->end()
                 ->end()
+                ->arrayNode('uploading')
+                    ->children()
+                        ->scalarNode('entity')->end()
+                    ->end()
+                ->end()
             ->end();
     }
 
     public function loadExtension(array $config, ContainerConfigurator $containerConfigurator, ContainerBuilder $containerBuilder): void
     {
         $containerConfigurator->import(__DIR__ . '/../config/services.yaml');
-        $definition = $containerBuilder->getDefinition('symfony_uploading_avito_cian_yandex.uploading_xml_normalizer');
-
+        $definitionUploadingXmlNormalizer = $containerBuilder->getDefinition('symfony_uploading_avito_cian_yandex.uploading_xml_normalizer');
         /** @var XmlSourceInterface $sourceClass */
         foreach ([new AvitoSource(), new CianSource(), new YandexSource()] as $sourceClass) {
             if (!empty($config['sources'][$sourceClass::getSource()]) && empty($config['sources'][$sourceClass::getSource()]['source'])) {
                 $config['sources'][$sourceClass::getSource()]['source'] = $sourceClass::class;
             }
         }
+        $definitionUploadingXmlNormalizer->setArgument('$sources', $config['sources']);
 
-        $definition->setArgument('$sources', $config['sources']);
+        $definitionUploadingService = $containerBuilder->getDefinition('symfony_uploading_avito_cian_yandex.uploading_service');
+        $definitionUploadingService->setArgument('$uploadingEntityClassName', $config['uploading']['entity']);
     }
 
 }
