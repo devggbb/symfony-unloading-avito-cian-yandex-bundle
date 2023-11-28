@@ -23,22 +23,32 @@ class UploadingService implements UploadingServiceInterface
     {
     }
 
+    public function prepareAddObject(UploadingInterface $uploading, XmlSourceInterface $source): UploadingInterface
+    {
+        $uploadingRepository = $this->entityManager->getRepository($this->uploadingEntityClassName);
+        if ($uploadingRepository->findOneBy(['object' => $uploading->getObject(), 'source' => $source::getSource(), 'status' => StatusType::PUBLISHED])) {
+            throw new \Exception('The object has already been unloaded');
+        }
+
+        /** @var AbstractUploading $uploading */
+        $uploading->setStatus(StatusType::PUBLISHED);
+        $uploading->setSource($source::getSource());
+
+        return $uploading;
+    }
+
     public function addObject(UploadingXmlNormalizerInterface $object, XmlSourceInterface $source): UploadingInterface
     {
         $uploadingRepository = $this->entityManager->getRepository($this->uploadingEntityClassName);
-        $uploading = $uploadingRepository->findOneBy(['object' => $object, 'source' => $source::getSource(), 'status' => StatusType::PUBLISHED]);
-        if ($uploading) {
+        if ($uploadingRepository->findOneBy(['object' => $object, 'source' => $source::getSource(), 'status' => StatusType::PUBLISHED])) {
             throw new \Exception('The object has already been unloaded');
         }
 
         /** @var AbstractUploading $uploading */
         $uploading = new $this->uploadingEntityClassName();
         $uploading->setObject($object);
-        $uploading->setStatus(StatusType::PUBLISHED);
+        $uploading->setStatus(StatusType::OFF);
         $uploading->setSource($source::getSource());
-
-        $this->entityManager->persist($uploading);
-        $this->entityManager->flush();
 
         return $uploading;
     }

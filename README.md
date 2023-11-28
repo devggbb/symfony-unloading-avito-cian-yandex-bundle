@@ -7,6 +7,8 @@ symfony_uploading_avito_cian_yandex:
       normalizer: App\UploadingSerializer\CianNormalizer
     yandex:
       normalizer: App\UploadingSerializer\YandexNormalizer
+  uploading:
+    entity: App\Entity\EstateObjectUploading
 ```
 
 ```
