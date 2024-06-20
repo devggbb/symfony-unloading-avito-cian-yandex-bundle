@@ -10,5 +10,7 @@ services:
     class: Ggbb\SymfonyUploadingAvitoCianYandexBundle\Serializer\UploadingXmlNormalizer
     autowire: true
     autoconfigure: true
+    arguments:
+      $container: '@service_container'
     tags:
       - { name: serializer.normalizer, priority: -155000 }

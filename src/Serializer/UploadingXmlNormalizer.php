@@ -5,6 +5,7 @@ namespace Ggbb\SymfonyUploadingAvitoCianYandexBundle\Serializer;
 use Ggbb\SymfonyUploadingAvitoCianYandexBundle\Entity\interface\UploadingXmlNormalizerInterface;
 use Ggbb\SymfonyUploadingAvitoCianYandexBundle\Exception\UploadingValidationException;
 use Ggbb\SymfonyUploadingAvitoCianYandexBundle\Xml\XmlSourceInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
@@ -13,6 +14,7 @@ class UploadingXmlNormalizer implements NormalizerInterface
     public function __construct(
         private array $sources,
         private ValidatorInterface $validator,
+        private ContainerInterface $container,
     )
     {
     }
@@ -32,7 +34,7 @@ class UploadingXmlNormalizer implements NormalizerInterface
 
         /** @var XmlSourceInterface $sourceClass */
         $sourceClass = new $source['source']();
-        $normalizer = new $source['normalizer']();
+        $normalizer = $this->container->get($source['normalizer']);
 
         $normalizedData = $normalizer->normalize($object, $sourceClass->getItem());
         $errors = $this->validator->validate($normalizedData);
