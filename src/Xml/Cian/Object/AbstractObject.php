@@ -34,6 +34,18 @@ abstract class AbstractObject
     const LAYOUT_MIXED = 'mixed';
     const LAYOUT_OPEN_SPACE = 'openSpace';
 
+    const COSMETIC_REPAIRS_REQUIRED = 'cosmeticRepairsRequired';
+    const MAJOR_REPAIRS_REQUIRED = 'majorRepairsRequired';
+    const TYPICAL = 'typical';
+
+    const COMMON_FROM_STREET = 'commonFromStreet';
+    const COMMON_FROM_YARD = 'commonFromYard';
+    const SEPARATE_FROM_STREET = 'separateFromStreet';
+    const SEPARATE_FROM_YARD = 'separateFromYard';
+
+    const ACCESS_TYPE_FREE = 'free';
+    const ACCESS_TYPE_PASS_SYSTEM = 'passSystem';
+
     #[Assert\NotBlank]
     #[Assert\Choice(choices: [
         self::CATEGORY_GARAGE_RENT,
@@ -57,6 +69,7 @@ abstract class AbstractObject
     public string $Category;
     #[Assert\NotBlank]
     public string $ExternalId;
+    public ?string $Title;
     #[Assert\NotBlank]
     public string $Description;
     #[Assert\NotBlank]
@@ -80,4 +93,23 @@ abstract class AbstractObject
     public ?Coordinates $Coordinates;
     #[Assert\NotBlank]
     public Phones $Phones;
+    #[Assert\Choice(choices: [
+        self::COSMETIC_REPAIRS_REQUIRED,
+        self::MAJOR_REPAIRS_REQUIRED,
+        self::TYPICAL,
+    ])]
+    public ?string $ConditionType;
+    #[Assert\Choice(choices: [
+        self::COMMON_FROM_STREET,
+        self::COMMON_FROM_YARD,
+        self::SEPARATE_FROM_STREET,
+        self::SEPARATE_FROM_YARD,
+    ])]
+    public ?string $InputType;
+    #[Assert\Choice(choices: [
+        self::ACCESS_TYPE_FREE,
+        self::ACCESS_TYPE_PASS_SYSTEM,
+    ])]
+    public ?string $AccessType;
+    public ?int $ClientFee;
 }

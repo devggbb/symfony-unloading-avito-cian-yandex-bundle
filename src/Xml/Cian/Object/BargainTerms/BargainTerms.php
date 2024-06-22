@@ -2,6 +2,7 @@
 
 namespace Ggbb\SymfonyUploadingAvitoCianYandexBundle\Xml\Cian\Object\BargainTerms;
 
+use Ggbb\SymfonyUploadingAvitoCianYandexBundle\Xml\Cian\Object\BargainTerms\IncludedOptions\IncludedOptions;
 use Symfony\Component\Validator\Constraints as Assert;
 
 class BargainTerms
@@ -24,7 +25,6 @@ class BargainTerms
 
     const LEASE_TYPE_DIRECT = 'direct';
     const LEASE_TYPE_SUBLEASE = 'sublease';
-
 
     #[Assert\NotBlank]
     public float $Price;
@@ -53,6 +53,7 @@ class BargainTerms
         self::VAL_TYPE_USN,
     ])]
     public string $VatType;
+    public IncludedOptions $IncludedOptions;
     #[Assert\Choice(choices: [
         self::LEASE_TYPE_DIRECT,
         self::LEASE_TYPE_SUBLEASE,

@@ -147,6 +147,17 @@ class Ad
     const LEASE_DEPOSIT_2 = '2 месяца';
     const LEASE_DEPOSIT_25 = '2,5 месяца';
     const LEASE_DEPOSIT_3 = '3 месяца';
+    /*
+     * https://www.avito.ru/autoload/documentation/templates/67086?fileFormat=excel#field-PriceWithVAT
+     */
+    const PRICE_WITH_VAT_YES = 'Да';
+    const PRICE_WITH_VAT_NO = 'Нет';
+    /*
+     * https://www.avito.ru/autoload/documentation/templates/67086?fileFormat=excel#field-LeasePriceOptions
+     */
+    const LEASE_PRICE_OPTIONS_COUNTERS = 'Оплата по счетчикам включена';
+    const LEASE_PRICE_OPTIONS_SERVICES = 'Коммунальные услуги включены';
+    const LEASE_PRICE_OPTIONS_EXPLOITATION = 'Эксплуатационные расходы включены';
 
 
     #[Assert\NotBlank]
@@ -308,4 +319,10 @@ class Ad
     public ?string $LeaseDeposit;
     #[Assert\NotBlank]
     public ?int $LeaseCommissionSize;
+    #[Assert\Choice(choices: [
+        self::PRICE_WITH_VAT_YES,
+        self::PRICE_WITH_VAT_NO,
+    ])]
+    public ?string $PriceWithVAT;
+    public ?string $LeasePriceOptions;
 }
