@@ -90,6 +90,10 @@ class Ad
     const ENTRANCE_STREET = 'С улицы';
     const ENTRANCE_YARD = 'Со двора';
     /*
+     * https://www.avito.ru/autoload/documentation/templates/67086?fileFormat=excel#field-EntranceAdditionally
+     */
+    const ENTRANCE_ADDITIONALLY = 'Отдельный вход';
+    /*
      * https://www.avito.ru/autoload/documentation/templates/67086#field-Floor
      */
     const FLOOR_BASEMENT = 'Подвальный';
@@ -225,16 +229,6 @@ class Ad
         self::OBJECT_TYPE_BUILDING,
     ])]
     public string $ObjectType;
-    #[Assert\Choice(choices: [
-        self::ADDITIONAL_OBJECT_TYPES_OFFICE,
-        self::ADDITIONAL_OBJECT_TYPES_FREE_APPOINTMENT,
-        self::ADDITIONAL_OBJECT_TYPES_COMMERCIAL_PREMISES,
-        self::ADDITIONAL_OBJECT_TYPES_WAREHOUSE,
-        self::ADDITIONAL_OBJECT_TYPES_PRODUCTION,
-        self::ADDITIONAL_OBJECT_TYPES_CATERING,
-        self::ADDITIONAL_OBJECT_TYPES_HOTEL,
-        self::ADDITIONAL_OBJECT_TYPES_CAR_SERVICE,
-    ])]
     public ?string $AdditionalObjectTypes;
     #[Assert\NotBlank]
     #[Assert\Choice(choices: [
@@ -253,6 +247,10 @@ class Ad
         self::ENTRANCE_YARD,
     ])]
     public string $Entrance;
+    #[Assert\Choice(choices: [
+        self::ENTRANCE_ADDITIONALLY,
+    ])]
+    public ?string $EntranceAdditionally;
     #[Assert\NotBlank]
     public string $Floor;
     #[Assert\NotBlank]

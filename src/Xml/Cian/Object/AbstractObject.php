@@ -7,6 +7,7 @@ use Ggbb\SymfonyUploadingAvitoCianYandexBundle\Xml\Cian\Object\Building\Building
 use Ggbb\SymfonyUploadingAvitoCianYandexBundle\Xml\Cian\Object\Coordinates\Coordinates;
 use Ggbb\SymfonyUploadingAvitoCianYandexBundle\Xml\Cian\Object\Phones\Phones;
 use Ggbb\SymfonyUploadingAvitoCianYandexBundle\Xml\Cian\Object\Photos\Photos;
+use Ggbb\SymfonyUploadingAvitoCianYandexBundle\Xml\Cian\Object\Specialty\Specialty;
 use Symfony\Component\Validator\Constraints as Assert;
 
 abstract class AbstractObject
@@ -112,4 +113,5 @@ abstract class AbstractObject
     ])]
     public ?string $AccessType;
     public ?int $ClientFee;
+    public ?Specialty $Specialty;
 }
